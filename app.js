@@ -1,5 +1,34 @@
 'use strict';
 
+// function toggleClass(){
+//   let menu = document.querySelector(".mainMenu");
+//   menu.classList.toggle("toggleCls");
+// }
+
+// let hamburger = document.querySelector(".hamIcon");
+
+// hamburger.addEventListener("click", toggleClass);
+
+var newform = document.getElementById('newform');
+newform.addEventListener('submit', formHandler);
+function formHandler(event) {
+  event.preventDefault();
+  var location = event.target.location.value;
+  var lowcustomer = event.target.lowcustomer.value;
+  var highcustomer = event.target.highcustomer.value;
+  var averagesale = event.target.averagesale.value;
+  var newStore = new StoreLocation(lowcustomer, highcustomer, averagesale, location);
+  newStore.populateSales();
+  newStore.render();
+  // need to delete tfoot element
+  // call the render footer function again
+}
+
+
+
+
+
+
 var hoursOfOperation = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 
 var allStores = [];
@@ -32,6 +61,8 @@ StoreLocation.prototype.populateSales = function () {
   }
 };
 StoreLocation.prototype.render = function () {
+
+  // <tr><th>locationName</th><td>saleHour[0]></td><td>saleHour[1]</td> ... </tr>
 
   var parentElement = document.getElementsByTagName('table')[0];
   var row = document.createElement('tr');
@@ -92,6 +123,13 @@ function renderFooter() {
   parentElement.appendChild(tfoot);
 
 }
+
+
+
+
+
+
+
 
 var seattle = new StoreLocation(23, 65, 6.3, 'seattle');
 seattle.populateSales();
