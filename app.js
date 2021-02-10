@@ -1,5 +1,20 @@
 'use strict';
 
+
+var newform = document.getElementById('newform');
+newform.addEventListener('submit', formHandler);
+function formHandler(event) {
+  event.preventDefault();
+  var location = event.target.location.value;
+  var lowcustomer = event.target.lowcustomer.value;
+  var highcustomer = event.target.highcustomer.value;
+  var averagesale = event.target.averagesale.value;
+  var newStore = new StoreLocation(lowcustomer, highcustomer, averagesale, location);
+  newStore.populateSales();
+  newStore.render();
+}
+
+
 var hoursOfOperation = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 
 var allStores = [];
@@ -108,8 +123,5 @@ paris.render();
 var lima = new StoreLocation(2, 16, 4.6, 'lima');
 lima.populateSales();
 lima.render();
-
-
-
 
 renderFooter();
