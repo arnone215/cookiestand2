@@ -3,6 +3,7 @@
 var hoursOfOperation = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 
 var allStores = [];
+var parentElement = document.getElementsByTagName('table')[0];
 
 function StoreLocation(minBoughtPerHour, maxBoughtPerHour, avgSale, locationName) {
   this.minBoughtPerHour = minBoughtPerHour;
@@ -11,6 +12,7 @@ function StoreLocation(minBoughtPerHour, maxBoughtPerHour, avgSale, locationName
   this.locationName = locationName;
   this.saleHour = [];
   this.amountCookies = 0;
+  this.render();
   allStores.push(this);
 }
 
@@ -33,6 +35,7 @@ StoreLocation.prototype.populateSales = function () {
 };
 StoreLocation.prototype.render = function () {
 
+  this.populateSales();
   var parentElement = document.getElementsByTagName('table')[0];
   var row = document.createElement('tr');
   var thead = document.createElement('th');
@@ -51,22 +54,24 @@ StoreLocation.prototype.render = function () {
   row.appendChild(tdataone);
 
 };
-var parentElement = document.getElementsByTagName('table')[0];
-var row = document.createElement('tr');
-var thead = document.createElement('th');
-var outPut = 'Salmon Cookie Sales';
-thead.textContent = outPut;
-row.appendChild(thead);
-parentElement.appendChild(row);
 
-for (var i = 0; i < hoursOfOperation.length; i++) {
-  var tdata = document.createElement('th');
-  tdata.textContent = this.hoursOfOperation[i];
-  row.appendChild(tdata);
+function renderHeader() {
+  var row = document.createElement('tr');
+  var thead = document.createElement('th');
+  var outPut = 'Salmon Cookie Sales';
+  thead.textContent = outPut;
+  row.appendChild(thead);
+  parentElement.appendChild(row);
+
+  for (var i = 0; i < hoursOfOperation.length; i++) {
+    var tdata = document.createElement('th');
+    tdata.textContent = hoursOfOperation[i];
+    row.appendChild(tdata);
+  }
+  var totalSale = document.createElement('th');
+  totalSale.textContent = 'Total sold';
+  row.appendChild(totalSale);
 }
-var totalSale = document.createElement('th');
-totalSale.textContent = 'Total sold';
-row.appendChild(totalSale);
 
 function renderFooter() {
   var tfoot = document.createElement('tfoot');
@@ -93,22 +98,13 @@ function renderFooter() {
 
 }
 
-var seattle = new StoreLocation(23, 65, 6.3, 'seattle');
-seattle.populateSales();
-seattle.render();
-var tokyo = new StoreLocation(3, 24, 1.2, 'tokyo');
-tokyo.populateSales();
-tokyo.render();
-var dubai = new StoreLocation(11, 38, 3.7, 'dubai');
-dubai.populateSales();
-dubai.render();
-var paris = new StoreLocation(20, 38, 2.3, 'paris');
-paris.populateSales();
-paris.render();
-var lima = new StoreLocation(2, 16, 4.6, 'lima');
-lima.populateSales();
-lima.render();
+renderHeader();
 
+new StoreLocation(23, 65, 6.3, 'seattle');
+new StoreLocation(3, 24, 1.2, 'tokyo');
+new StoreLocation(11, 38, 3.7, 'dubai');
+new StoreLocation(20, 38, 2.3, 'paris');
+new StoreLocation(2, 16, 4.6, 'lima');
 
 
 
