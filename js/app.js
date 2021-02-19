@@ -9,9 +9,11 @@ function formHandler(event) {
   var lowcustomer = event.target.lowcustomer.value;
   var highcustomer = event.target.highcustomer.value;
   var averagesale = event.target.averagesale.value;
-  var newStore = new StoreLocation(lowcustomer, highcustomer, averagesale, location);
-  newStore.populateSales();
-  newStore.render();
+
+  // if (isNaN(lowcustomer))
+  //   return 'Not a Number!';
+
+  new StoreLocation(lowcustomer, highcustomer, averagesale, location);
 }
 
 var hoursOfOperation = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
